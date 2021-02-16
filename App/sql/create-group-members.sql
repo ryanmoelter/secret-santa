@@ -1,0 +1,1 @@
+CREATE TABLE group_members(Id serial PRIMARY KEY,Name varchar(100) NOT NULL,Request_time timestamp NOT NULL);
