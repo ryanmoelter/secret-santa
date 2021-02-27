@@ -19,7 +19,7 @@ class Database:
 
     def execute_insert(self,query,name):
         try:
-            self.cur.execute(query, tuple(name))
+            self.cur.execute(query, (name,))
             self.conn.commit()
             print(" Added {} to group_members table.".format(name))
         except Exception as e:

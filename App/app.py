@@ -1,5 +1,5 @@
 #internal
-from dbOperations import dbConn
+from App.dbOperations import dbConn
 
 #external
 import json
@@ -18,9 +18,6 @@ class Person:
 
     def __init__(self,name):
         self.name = name
-    
-    def name(self):
-        return str(self.name)
 
 @app.route("/")
 def createGroupPage():
@@ -29,11 +26,12 @@ def createGroupPage():
 @app.route("/add-person",methods=["POST"])
 def addPerson():
     person = request.form.get("name")
-    name = Person(person).name
-    query = """insert into group_members(Name) values (%s)"""
+    name = Person(person).name.strip()
+    query = """insert into group_members(name) values(%s)"""
     dbConn.execute_insert(query,name)
     return redirect("/")
 
 if __name__=='__main__':
     app.run(debug=True)
-    
+
+
