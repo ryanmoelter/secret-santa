@@ -1,12 +1,12 @@
 #internal
-from App.dbOperations import dbConn
+from dbOperations import dbConn
 
 #external
 import json
 import psycopg2 as pg
 from psycopg2 import sql
 
- 
+# flask 
 from flask import Flask
 from flask import render_template
 from flask import request

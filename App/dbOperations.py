@@ -1,20 +1,16 @@
 import json
 import psycopg2 as pg
+import os
 
 class Database:
     """ Handles the main connection to the database of the app setting """
-    def __init__(self, db, username, password, port, host, sslmode):
-        self.db = db
-        self.username = username
-        self.password = password
-        self.port = port
-        self.host = host
-        self.sslmode = sslmode
+    def __init__(self, db_url):
+        self.db_url = db_url
         self.cur = None
         self.conn = None
 
     def connect(self):
-        self.conn = pg.connect(database=self.db, user=self.username, password=self.password, port=self.port, host=self.host, sslmode=self.sslmode)
+        self.conn = pg.connect(self.db_url)
         self.cur = self.conn.cursor()
 
     def execute_insert(self,query,name):
@@ -47,8 +43,6 @@ class Database:
         self.cur.execute(query)
         self.conn.commit
 
-
-with open("creds.json") as f:
-    data = json.load(f)[0]
-dbConn = Database(data['database'], data['username'], data['password'], data['port'], data['host'], data['sslmode'])
+db = os.getenv('DATABASE_URL')
+dbConn = Database(db)
 dbConn.connect()
