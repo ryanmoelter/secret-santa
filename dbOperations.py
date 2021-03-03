@@ -33,7 +33,7 @@ class Database:
     """ Add/Alter/Drop DB Tables """    
     def create_group_table(self):
         """ creates group members tables """
-        query = """CREATE TABLE group_members(Id serial PRIMARY KEY,Name varchar(100) NOT NULL,Request_time timestamp NOT NULL);"""
+        query = """CREATE TABLE group_members(Id serial PRIMARY KEY,name varchar(100) NOT NULL)"""
         self.cur.execute(query)
         self.conn.commit()
 
